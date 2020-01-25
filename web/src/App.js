@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import Cred from './Credentials'
+import Cred from './Cred'
 import './App.css';
 
 function onMarkerClick(){
