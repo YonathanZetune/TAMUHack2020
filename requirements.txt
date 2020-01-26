@@ -2,3 +2,4 @@ fastapi==0.47.1
 uvicorn==0.11.2
 pymongo
 dnspython
+pydantic
