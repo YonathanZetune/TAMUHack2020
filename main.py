@@ -26,6 +26,9 @@ class People(BaseModel):
     lat: float
     lg: float
 
+# class PeopleListView(BaseModel):
+#     body: List[People]
+
 class Animal(BaseModel):
     lat: float
     lg: float
@@ -45,7 +48,18 @@ async def read_item(item_id: int, q: str = None):
 async def update_item(item_id: int, item: Item):
     return {"item_price": item.price, "item_id": item_id}
 
-person1 = People("name":"Anooj","lg":-19.1,"lt":10.01)
-print(person1)
+@app.get("/people")
+async def read_People():
+    yaw = []
+    for person in people.find():
+        person.pop('_id')
+        yaw.append(person)
+
+    results = {"body": yaw}
+    return results
+    
+
+# person1 = People("name":"Anooj","lg":-19.1,"lt":10.01)
+# print(person1)
 # payload = {person1}
 # x = people.insert_one(json.dumps(payload))
