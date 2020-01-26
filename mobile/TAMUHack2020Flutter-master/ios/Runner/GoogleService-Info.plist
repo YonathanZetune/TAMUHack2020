@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>637423687271-6p8cbvbk4gidtvt0ei5vkrdrlu89am0b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.637423687271-6p8cbvbk4gidtvt0ei5vkrdrlu89am0b</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC29VAoaJdOplMBzc2L3YSmfgeCxQaKILA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>637423687271</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>tamuhack2020.yonathanzetune.com.tamuHack2020</string>
+	<key>PROJECT_ID</key>
+	<string>tamuhack2020-1579988133085</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tamuhack2020-1579988133085.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:637423687271:ios:9452530a8a0dd8b8e766c2</string>
+	<key>DATABASE_URL</key>
+	<string>https://tamuhack2020-1579988133085.firebaseio.com</string>
+</dict>
+</plist>

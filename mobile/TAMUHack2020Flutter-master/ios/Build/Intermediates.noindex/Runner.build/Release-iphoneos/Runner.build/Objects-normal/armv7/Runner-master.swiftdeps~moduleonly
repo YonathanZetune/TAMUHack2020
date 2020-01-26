@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.6 clang-1100.0.32.1)"
+options: "b9252a9e38bec117f528fb608f432baf"
+build_time: [1580014924, 659349000]
+inputs:
+  "/Users/YoniZetune/Develop/tamu_hack_2020/ios/Runner/AppDelegate.swift": [9223372036, 854775807]
