@@ -3,7 +3,15 @@ from pydantic import BaseModel
 import pymongo
 import json
 import smtplib, ssl
+from starlette.middleware.cors import CORSMiddleware
 
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "https://gentle-reef-37448.herokuapp.com"
+]
 
 
 myclient = pymongo.MongoClient("mongodb+srv://admin-lucas:yawyeet123@tamuhack2020-dqplj.mongodb.net/tamuhackDB")
@@ -15,6 +23,15 @@ print(myclient.list_database_names())
 print(mydb.list_collection_names())
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 class Item(BaseModel):
