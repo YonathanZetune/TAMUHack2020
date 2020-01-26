@@ -18,6 +18,7 @@ myclient = pymongo.MongoClient("mongodb+srv://admin-lucas:yawyeet123@tamuhack202
 mydb = myclient["tamuhackDB"]
 people = mydb["people"]
 animal = mydb["animal"]
+tweet = mydb["tweet"]
 
 print(myclient.list_database_names())
 print(mydb.list_collection_names())
@@ -56,6 +57,11 @@ class Animal(BaseModel):
     status: int = -1
     animalID: str
 
+class Tweet(BaseModel):
+    name: str
+    content: str
+    lat: float
+    lg: float
 
 # @app.get("/")
 # async def read_root():
@@ -73,9 +79,27 @@ class Animal(BaseModel):
 # async def update_item(item: Item):
 #     return item
 
-@app.post("/animals/")
-async def create_item(item: Animal):
+@app.get("/tweets/")
+async def read_tweet():
+    tweets = []
+    for i in tweet.find({}, {'_id': False}):
+        print(type(i))
+        tweets.append(i)
+    print(tweets)
+    dict = {}
+    dict["tweets"] = tweets
+    print(dict)
+    return dict
 
+@app.post("/tweets/")
+async def create_tweet(item: Tweet):
+    mydict = {"name": str(item.name), "content":str(item.content), "lat": float(item.lat), "lg": float(item.lg)}
+    x = tweet.insert_one(mydict)
+    return item
+
+
+@app.post("/animals/")
+async def create_animal(item: Animal):
     mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered),
      "status": int(item.status), "animalID": str(item.animalID)}
 
@@ -110,14 +134,14 @@ async def create_item(item: Animal):
     return item
 
 @app.post("/persons/")
-async def create_item(item: People):
+async def create_person(item: People):
     mydict = {"name": str(item.name), "lat": float(item.lat), "lg": float(item.lg)}
     x = people.insert_one(mydict)
     return item
 
 # get a list of persons
 @app.get("/persons/")
-async def read_persons():
+async def read_person():
     peeps = []
     for i in people.find({}, {'_id': False}):
         print(type(i))
@@ -131,7 +155,7 @@ async def read_persons():
 
 
 @app.get("/animals/{item_id}")
-async def read_item(item_id: str, status: str = None):
+async def read_animal(item_id: str, status: str = None):
     result = animal.find_one({"animalID": str(item_id)}, {"status": 1})
     print(result["status"])
     status = result["status"]
@@ -140,7 +164,7 @@ async def read_item(item_id: str, status: str = None):
 
 # get a list of persons
 @app.get("/animals/")
-async def read_animals():
+async def read_animal():
     animals = []
     for i in animal.find({}, {'_id': False}):
         print(type(i))
