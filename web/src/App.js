@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, HeatMap} from 'google-maps-react';
-import GoogleMapReact from 'google-map-react';
 import Koala from './koala.png'
 import Paw from './DogPaw.png'
 import Parrot from './parrot.png'
@@ -9,7 +8,6 @@ import kangaroo from './kangaroo.png'
 import Help from './Help.png'
 import Cred from './Cred'
 import axios from 'axios'
-import LoadingFire from "./loadingFire.gif"
 import Logo from "./Barelogo.svg"
 import './App.css';
 
