@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import pymongo
 import json
+import smtplib, ssl
+
 
 myclient = pymongo.MongoClient("mongodb+srv://admin-lucas:yawyeet123@tamuhack2020-dqplj.mongodb.net/tamuhackDB")
 
@@ -14,6 +16,27 @@ print(myclient.list_database_names())
 print(mydb.list_collection_names())
 
 app = FastAPI()
+
+# email configuration
+port = 465  # For SSL
+smtp_server = "smtp.gmail.com"
+sender_email = "johnjaydeveloper14@gmail.com"  # Enter your address
+receiver_email = "charleslucasrollo@gmail.com"  # Enter receiver address
+password = input("Type your password and press enter: ")
+body =
+message = """\
+Subject: HELP the Koalas!!
+
+This message is sent from ur mom."""
+# make the email
+
+# Create a secure SSL context
+context = ssl.create_default_context()
+
+with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+    server.login("johnjaydeveloper14@gmail.com", password)
+    server.sendmail(sender_email, receiver_email, message)
+
 
 class Item(BaseModel):
     name: str
