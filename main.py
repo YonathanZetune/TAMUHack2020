@@ -47,6 +47,25 @@ async def read_item(item_id: int, q: str = None):
 async def update_item(item_id: int, item: Item):
     return {"item_price": item.price, "item_id": item_id}
 
+@app.post("/items")
+async def update_item(item: Item):
+    return item
+
+@app.post("/animals/")
+async def create_item(item: Animal):
+    mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered)}
+    x = animal.insert_one(mydict)
+    return item
+
+@app.post("/persons/")
+async def create_item(item: People):
+
+    mydict = {"name": str(item.name), "lat": float(item.lat), "lg": float(item.lg)}
+    x = people.insert_one(mydict)
+    return item
+
+
+
 # get a list of persons
 @app.get("/persons/")
 async def read_persons():
