@@ -37,7 +37,7 @@ class Animal(BaseModel):
     endangered: int = -1
     status: int = -1
     animalID: str
-    
+
 
 
 # @app.get("/")
