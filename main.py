@@ -26,6 +26,9 @@ class People(BaseModel):
     lat: float
     lg: float
 
+# class PeopleListView(BaseModel):
+#     body: List[People]
+
 class Animal(BaseModel):
     lat: float
     lg: float
@@ -58,7 +61,6 @@ async def read_persons():
     print(dict)
     return dict
     # return {"people": [{"name":"ANOOJ","ads":None},{"name":"Lucas","ads":None}]}
-
 
 # payload = {person1}
 # x = people.insert_one(json.dumps(payload))
