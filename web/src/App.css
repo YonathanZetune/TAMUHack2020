@@ -9,11 +9,46 @@
   overflow: hidden;
   background-size: cover;
   background-position: center;
-  
-  background-image: url('./loadingFire.gif');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(#f8b226ff, #ff0039e2);
+  /* background-image: url('./loadingFire.gif'); */
   
 }
+.fill img{
+  animation: bounceOut 6s infinite ease;
+}
+@keyframes bounceOut {
+  20% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  50%,
+  55% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+}
+
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
 .fill h1{
+  color: white;
+  text-align: center;
+}
+.fill h3{
   color: white;
   text-align: center;
 }

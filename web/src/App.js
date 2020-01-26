@@ -6,9 +6,11 @@ import Paw from './DogPaw.png'
 import Parrot from './parrot.png'
 import twitter from './twitter.png'
 import kangaroo from './kangaroo.png'
+import Help from './Help.png'
 import Cred from './Cred'
 import axios from 'axios'
 import LoadingFire from "./loadingFire.gif"
+import Logo from "./Barelogo.svg"
 import './App.css';
 
 const animIm={
@@ -20,6 +22,7 @@ const animIm={
   "Kangaroo":kangaroo,
   "animal":Paw
 }
+
 
 const gradient = [
   'rgba(0, 255, 255, 0)',
@@ -39,6 +42,34 @@ const gradient = [
 ];
 
 
+const helpCenters=[
+  {
+    name:"Canberra Refuge and Animal Shelter",
+    address:"Mugga Ln, Symonston ACT 2609, Australia",
+    description:"We provide temporary shelter to both humans and animals in need",
+    loc:{lat: -35.351389,lng:149.134720}
+  },
+  {
+    name:"Sydney Relief & Rescue",
+    address:"5 Bay St, Rockdale NSW 2216, Australia",
+    description:"We provide shelter, and necesities to those displaced by fires",
+    loc:{lat: -33.953966, lng: 151.139332}
+  },
+  {
+    name:"Anthropocene Rescue",
+    address:"National Route 1, Brogo NSW 2550, Australia",
+    description:"A state of the oasis for Koalas, Kangaroos, and Wombats",
+    loc:{lat: -36.544437, lng: 149.826327}
+  },
+  {
+    name:"Great Barier Relief",
+    address:"133 Kurrajong Rd, Narre Warren VIC 3805, Australia",
+    description:"Providing the greater Melbourne Area with suplies shelter, and voluntiers",
+    loc:{lat: -38.001440,  lng: 145.314314}
+  }
+
+]
+
 class App extends Component {
 
   constructor(props){
@@ -49,20 +80,22 @@ class App extends Component {
     this.onInfoWindowClose=this.onInfoWindowClose.bind(this);
     this.onMapClicked=this.onMapClicked.bind(this);
     this.onMouseoverMarker=this.onMouseoverMarker.bind(this);
+    this.getTweets=this.getTweets.bind(this);
     // console.log("end",this.getAll([{lat:-37.547991,lon: 149.605046},{lat:-35.884544,lon: 149.573742}]));
     this.state={
       positions: [],
       ready:0,
       animals: [],
+      tweets:[],
       activeMarker: {},
       selectedPlace: {},
       showingInfoWindow: false
     }
   }
   componentDidMount(){
-    
+    this.getTweets();
     this.getAnimals();
-    this.getFires([{lat:-37.547991,lon: 149.605046},{lat:-35.884544,lon: 149.573742}])
+    this.getFires([{lat:-37.547991,lon: 149.605046},{lat:-35.884544,lon: 149.573742},{lat:-33.60119,lon: 116.15500}])
     .then(() => {
       this.setState((state)=>{
         return {ready:1}
@@ -81,7 +114,7 @@ class App extends Component {
 
       setTimeout(() => {
         resolve();
-      }, 10000);
+      }, 6000);
     })
     
   }
@@ -100,6 +133,20 @@ class App extends Component {
       console.log(err);
     });
 
+  }
+
+  getTweets(){
+    var url = "https://gentle-reef-37448.herokuapp.com/tweets";
+    axios.get(url)
+    .then((res) => {
+      const arr = res.data.tweets.map(x => {return {loc: {lat: x.lat, lng: x.lg}, name: x.name, content: x.content}});
+      this.setState((state)=>{
+        return {tweets: state.tweets.concat(arr)}
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
 
@@ -130,7 +177,7 @@ class App extends Component {
         
       }
       );
-      // console.log(position);s
+      console.log(position);
         this.setState((state)=>{
           return {positions: state.positions.concat(position)}
         })
@@ -180,15 +227,15 @@ class App extends Component {
 
   render(){
     if (this.state.ready===0){
-      return <div className="fill"><h1>Loading</h1></div>
+      return <div className="fill"><h1>NotiFire</h1><img src={Logo}/><h3>Loading</h3></div>
     }
     return (
       <div className="App">
         <Map google={this.props.google}
           zoom={7} 
           initialCenter={{
-            lat: -33.239928,
-            lng: 150.406609
+            lat: -36.520900,
+            lng: 146.743292
           }}
           className={"map"}
           onDragend={this.centerMoved}
@@ -200,7 +247,7 @@ class App extends Component {
             radius={20}
           />
           {this.state.animals.map((animal,i)=>{
-            console.log(animal);
+            {/* console.log(animal); */}
             return (<Marker onClick={this.onMarkerClick} 
                 name={animal.species} 
                 location={`${animal.loc.lat},${animal.loc.lng}`}
@@ -213,23 +260,47 @@ class App extends Component {
                     }/>
                 )
           })}
-          <InfoWindow
+          {this.state.tweets.map((tweet,i)=>{
+            {/* console.log(tweet); */}
+            return (<Marker onClick={this.onMarkerClick} 
+                name={tweet.name}
+                location={`${tweet.loc.lat},${tweet.loc.lng}`}
+                position={tweet.loc}
+                content={tweet.content}
+                type={"tweet"}
+                key={`tweet${i}`}
+                icon={{
+                    url: twitter,
+                    scaledSize: {width:30,height:30}}
+                    }/>
+                )
+          })}
+          {helpCenters.map((center,i)=>{
+            {/* console.log(tweet); */}
+            return (<Marker onClick={this.onMarkerClick} 
+                name={center.name}
+                location={`${center.loc.lat},${center.loc.lng}`}
+                address={center.address}
+                position={center.loc}
+                content={center.description}
+                type={"help"}
+                key={`Help${i}`}
+                icon={{
+                    url: Help,
+                    scaledSize: {width:30,height:30}}
+                    }/>
+                )
+          })}
+          <InfoWindow Style={{maxWidth:"100px"}}
                       marker={this.state.activeMarker}
                       visible={this.state.showingInfoWindow}>
                         <div>
                           <h1>{this.state.selectedPlace.name}</h1>
+                          { this.state.selectedPlace.type=="tweet" ? <p style={{maxWidth:"300px"}}>{this.state.selectedPlace.content}</p>: ""}
+                          { this.state.selectedPlace.type=="help" ? <><h3>{this.state.selectedPlace.address}</h3><p style={{maxWidth:"300px", margin:"auto"}}>{this.state.selectedPlace.content}</p></> : ""}
                           <h5>{this.state.selectedPlace.location}</h5>
                         </div>
                     </InfoWindow>
-
-          {/* <Circle radius={1200}
-            Center={{lat:-33.464038,lng:150.777327}}/> */}
-   
-          {/* <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                {/* <h1>{state.selectedPlace.name}</h1> 
-              </div>
-          </InfoWindow> */}
         </Map>
         {this.state.animals.forEach((animal)=>{
             {/* console.log(<Marker onClick={this.onMarkerClick} name={animal.species} position={animal.loc}/>); */}
