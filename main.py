@@ -15,7 +15,6 @@ print(mydb.list_collection_names())
 
 app = FastAPI()
 
-
 class Item(BaseModel):
     name: str
     price: float
@@ -61,7 +60,22 @@ async def read_persons():
     print(dict)
     return dict
     # return {"people": [{"name":"ANOOJ","ads":None},{"name":"Lucas","ads":None}]}
-    
-#x = {"name":"john"}
-# payload = {x}
-#people.insert_one((payload))
+
+
+# get a list of persons
+@app.get("/animals/")
+async def read_animals():
+    animals = []
+    for i in animal.find({}, {'_id': False}):
+        print(type(i))
+        animals.append(i)
+    print(animals)
+    dict = {}
+    dict["animals"] = animals
+    print(dict)
+    return dict
+    # return {"people": [{"name":"ANOOJ","ads":None},{"name":"Lucas","ads":None}]}
+
+# payload = {"lat":30.30,"lg":-30.10,"species":"Dog","endangered":True}
+# x = animal.insert_one(payload)
+# print(x)
