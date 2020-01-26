@@ -32,7 +32,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+endangeredList = ['Cassowary', 'Tasmanian Devil', 'Gouldian Finch', 'Wombat', 'Snapping Turtle',
+ 'Night Parrot', 'Spotted Quoll', 'Greater Bilby',  'Leadbeaters Possum', 'Bandicoot', 'Plains Wanderer']
 
 class Item(BaseModel):
     name: str
@@ -51,11 +52,9 @@ class Animal(BaseModel):
     lat: float
     lg: float
     species: str
-    endangered: int = -1
+    endangered: int = 0
     status: int = -1
     animalID: str
-    
-
 
 # @app.get("/")
 # async def read_root():
@@ -75,16 +74,22 @@ class Animal(BaseModel):
 
 @app.post("/animals/")
 async def create_item(item: Animal):
+
     mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered),
      "status": int(item.status), "animalID": str(item.animalID)}
+
+    if str(item.species) in endangeredList:
+        print("yaw")
+        mydict["endangered"] = 1
+    
     x = animal.insert_one(mydict)
     # email configuration
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "johnjaydeveloper14@gmail.com"  # Enter your address
     receiver_email = "charleslucasrollo@gmail.com"  # Enter receiver address
-    password = input("Type your password and press enter: ")
-    # password = ""
+    #password = input("Type your password and press enter: ")
+    password = "johnjay123!"
     body = ""
     # message = """\
     # Subject: Help the Koalas!!\n\n
