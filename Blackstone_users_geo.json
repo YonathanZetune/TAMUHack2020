@@ -1,0 +1,124 @@
+{
+    "data": [
+        {
+            "user_id": 18462371,
+            "features": {
+                "name": "Mr. Absentia",
+                "id": 18462371,
+                "screen_name": "mr_absentia",
+                "tweets": 1,
+                "location": "Niphon (Japan)",
+                "primary_geo": "Niphon (Japan)",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 183594399,
+            "features": {
+                "name": "Sihle Ngobese",
+                "id": 183594399,
+                "screen_name": "BigDaddyLiberty",
+                "tweets": 1,
+                "location": "Cape Town, South Africa",
+                "primary_geo": "Cape Town, South Africa",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 3198349443,
+            "features": {
+                "name": "TonyF \ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc73\udb40\udc63\udb40\udc74\udb40\udc7f \ud83c\uddec\ud83c\udde7",
+                "id": 3198349443,
+                "screen_name": "ferrino100",
+                "tweets": 1,
+                "location": "Belgium",
+                "primary_geo": "Belgium",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 22645234,
+            "features": {
+                "name": "nadya",
+                "id": 22645234,
+                "screen_name": "nadyashamsuddin",
+                "tweets": 1,
+                "location": "London, England",
+                "primary_geo": "London, England",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 1108559928585650176,
+            "features": {
+                "name": "\"Teddy W\" Esq., Russian Bot of Antifa",
+                "id": 1108559928585650176,
+                "screen_name": "TeddyW16646660",
+                "tweets": 1,
+                "location": "Portland, OR",
+                "primary_geo": "Portland, OR",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 993711575126061056,
+            "features": {
+                "name": "Mitanur\u2665\ufe0fGazwa-e-Hind\ud83c\uddf5\ud83c\uddf0MuhammadQasim\ud83d\udcaf\ud83e\udd49",
+                "id": 993711575126061056,
+                "screen_name": "MitanurMousumi",
+                "tweets": 1,
+                "location": "Pakistan",
+                "primary_geo": "Pakistan",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 922710167581536257,
+            "features": {
+                "name": "GinaLovesTrump\ud83d\udd4a~Text TRUMP to 88022 \u2b50\u2b50\u2b50",
+                "id": 922710167581536257,
+                "screen_name": "Gina4DJT2020",
+                "tweets": 2,
+                "location": "United States",
+                "primary_geo": "United States",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 17801749,
+            "features": {
+                "name": "Citizen Halo \ud83c\uddeb\ud83c\uddee\ud83d\udc26\u23f3#HandsOffIran",
+                "id": 17801749,
+                "screen_name": "haloefekti",
+                "tweets": 1,
+                "location": "Finland",
+                "primary_geo": "Finland",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 260706920,
+            "features": {
+                "name": "Ville Kostian",
+                "id": 260706920,
+                "screen_name": "Kostian_V",
+                "tweets": 1,
+                "location": "Helsinki, Finland",
+                "primary_geo": "Helsinki, Finland",
+                "geo_type": "User location"
+            }
+        },
+        {
+            "user_id": 704519691075608576,
+            "features": {
+                "name": "TheAwkwardRepublican",
+                "id": 704519691075608576,
+                "screen_name": "TheAwkwardGOP",
+                "tweets": 2,
+                "location": "USA",
+                "primary_geo": "USA",
+                "geo_type": "User location"
+            }
+        }
+    ]
+}
