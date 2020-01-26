@@ -33,27 +33,31 @@ class Animal(BaseModel):
     lg: float
     species: str
     endangered: int = -1
+    status: int = -1
+    animalID: str
+    
 
 
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
+# @app.get("/")
+# async def read_root():
+#     return {"Hello": "World"}
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+# @app.get("/items/{item_id}")
+# async def read_item(item_id: int, q: str = None):
+#     return {"item_id": item_id, "q": q}
 
-@app.put("/items/{item_id}")
-async def update_item(item_id: int, item: Item):
-    return {"item_price": item.price, "item_id": item_id}
+# @app.put("/items/{item_id}")
+# async def update_item(item_id: int, item: Item):
+#     return {"item_price": item.price, "item_id": item_id}
 
-@app.post("/items")
-async def update_item(item: Item):
-    return item
+# @app.post("/items")
+# async def update_item(item: Item):
+#     return item
 
 @app.post("/animals/")
 async def create_item(item: Animal):
-    mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered)}
+    mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered),
+     "status": int(item.status), "animalID": str(item.animalID)}
     x = animal.insert_one(mydict)
     return item
 
@@ -63,8 +67,6 @@ async def create_item(item: People):
     mydict = {"name": str(item.name), "lat": float(item.lat), "lg": float(item.lg)}
     x = people.insert_one(mydict)
     return item
-
-
 
 # get a list of persons
 @app.get("/persons/")
@@ -79,6 +81,14 @@ async def read_persons():
     print(dict)
     return dict
     # return {"people": [{"name":"ANOOJ","ads":None},{"name":"Lucas","ads":None}]}
+
+
+@app.get("/animals/{item_id}")
+async def read_item(item_id: str, status: str = None):
+    result = animal.find_one({"animalID": str(item_id)}, {"status": 1})
+    print(result["status"])
+    status = result["status"]
+    return {"item_id": item_id, "status": status}
 
 
 # get a list of persons
