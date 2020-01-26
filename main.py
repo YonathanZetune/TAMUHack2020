@@ -5,10 +5,9 @@ import json
 import smtplib, ssl
 
 
+
 myclient = pymongo.MongoClient("mongodb+srv://admin-lucas:yawyeet123@tamuhack2020-dqplj.mongodb.net/tamuhackDB")
-
 mydb = myclient["tamuhackDB"]
-
 people = mydb["people"]
 animal = mydb["animal"]
 
@@ -16,26 +15,6 @@ print(myclient.list_database_names())
 print(mydb.list_collection_names())
 
 app = FastAPI()
-
-# email configuration
-port = 465  # For SSL
-smtp_server = "smtp.gmail.com"
-sender_email = "johnjaydeveloper14@gmail.com"  # Enter your address
-receiver_email = "charleslucasrollo@gmail.com"  # Enter receiver address
-password = input("Type your password and press enter: ")
-body =
-message = """\
-Subject: HELP the Koalas!!
-
-This message is sent from ur mom."""
-# make the email
-
-# Create a secure SSL context
-context = ssl.create_default_context()
-
-with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-    server.login("johnjaydeveloper14@gmail.com", password)
-    server.sendmail(sender_email, receiver_email, message)
 
 
 class Item(BaseModel):
@@ -78,16 +57,36 @@ async def update_item(item: Item):
 async def create_item(item: Animal):
     mydict = {"lat": float(item.lat), "lg":(item.lg), "species": str(item.species), "endangered": int(item.endangered)}
     x = animal.insert_one(mydict)
+    # email configuration
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "johnjaydeveloper14@gmail.com"  # Enter your address
+    receiver_email = "charleslucasrollo@gmail.com"  # Enter receiver address
+    password = input("Type your password and press enter: ")
+    # password = ""
+    body = ""
+    # message = """\
+    # Subject: Help the Koalas!!\n\n
+    # """
+    message = "Subject: Help the Koalas!!"
+    message += '\n'
+    message += '\n'
+    # make the email
+    # Create a secure SSL context
+    context = ssl.create_default_context()
+    body = "I wanted to bring to your attention that I saw a(n) " + str(item.species) + " in harms way. This animal was located last at https://www.google.com/maps/dir/?api=1&origin=Sydney+Australia&destination=" + str(item.lat) +','+ str(item.lg) +"\n"+"Thank you."
+    message += body
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login("johnjaydeveloper14@gmail.com", password)
+        server.sendmail(sender_email, receiver_email, message)
+
     return item
 
 @app.post("/persons/")
 async def create_item(item: People):
-
     mydict = {"name": str(item.name), "lat": float(item.lat), "lg": float(item.lg)}
     x = people.insert_one(mydict)
     return item
-
-
 
 # get a list of persons
 @app.get("/persons/")
