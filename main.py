@@ -30,7 +30,7 @@ class Animal(BaseModel):
     lat: float
     lg: float
     species: str
-    endangered: int
+    endangered: int = -1
 
 
 @app.get("/")
@@ -45,7 +45,20 @@ async def read_item(item_id: int, q: str = None):
 async def update_item(item_id: int, item: Item):
     return {"item_price": item.price, "item_id": item_id}
 
-person1 = People("name":"Anooj","lg":-19.1,"lt":10.01)
-print(person1)
+# get a list of persons
+@app.get("/persons/")
+async def read_persons():
+    peeps = []
+    for i in people.find({}, {'_id': False}):
+        print(type(i))
+        peeps.append(i)
+    print(peeps)
+    dict = {}
+    dict["people"] = peeps
+    print(dict)
+    return dict
+    # return {"people": [{"name":"ANOOJ","ads":None},{"name":"Lucas","ads":None}]}
+
+
 # payload = {person1}
 # x = people.insert_one(json.dumps(payload))
